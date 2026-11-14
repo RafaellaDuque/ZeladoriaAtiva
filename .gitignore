@@ -1,0 +1,34 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+
+# IDEs e Editores (IntelliJ, Eclipse, VS Code, NetBeans)
+.idea/
+*.iml
+.vscode/
+.classpath
+.project
+.settings/
+nbproject/
+
+# Compilados e builds do Java
+*.class
+bin/
+out/
+target/
+build/
+*.jar
+*.war
+*.ear
+
+# Logs e arquivos temporarios
+*.log
+*.tmp
+*.bak
+*.swp
+*~
+
+# Arquivo de entrega com RMs e link do pitch (manter apenas local para o .zip)
+integrantes_e_pitch.txt
