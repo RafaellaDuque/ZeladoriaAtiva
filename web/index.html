@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>
+      Zeladoria Ativa — Priorização Comunitária de Problemas Urbanos
+    </title>
+    <meta
+      name="description"
+      content="Plataforma CitizenTech onde moradores de São Paulo mapeiam problemas de zeladoria urbana e priorizam, por votação comunitária, a fila de atendimento das subprefeituras."
+    />
+    <meta name="theme-color" content="#4a2f78" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Marca que o JS está ativo: as animações de scroll só escondem conteúdo
+       quando esta classe existe (sem JS tudo aparece normalmente). -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </head>
+  <body data-pagina="home">
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; padding: 24px">
+        O Zeladoria Ativa precisa de JavaScript habilitado para renderizar o
+        painel de chamados.
+      </p>
+    </noscript>
+  </body>
+</html>

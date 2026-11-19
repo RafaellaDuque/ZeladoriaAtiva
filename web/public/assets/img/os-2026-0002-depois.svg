@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 540" width="960" height="540" role="img" aria-label="Calçada limpa e desobstruída após a conclusão do serviço de limpeza urbana">
+  <defs>
+    <linearGradient id="ceu6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#8fc7e8"/>
+      <stop offset="1" stop-color="#d8ecf7"/>
+    </linearGradient>
+    <linearGradient id="calc6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#e2ded4"/>
+      <stop offset="1" stop-color="#c2bcae"/>
+    </linearGradient>
+    <linearGradient id="pista6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9aa0a8"/>
+      <stop offset="1" stop-color="#6f767f"/>
+    </linearGradient>
+    <linearGradient id="verde6" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#3f8f5f"/>
+      <stop offset="1" stop-color="#26714a"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="960" height="540" fill="url(#ceu6)"/>
+  <circle cx="792" cy="96" r="46" fill="#ffe9a8" opacity="0.85"/>
+
+  <!-- prédios -->
+  <g fill="#b8c6d2">
+    <rect x="0" y="120" width="170" height="180"/>
+    <rect x="770" y="96" width="190" height="204"/>
+  </g>
+  <g fill="#a2b2c0" opacity="0.9">
+    <rect x="22" y="144" width="28" height="24"/><rect x="66" y="144" width="28" height="24"/>
+    <rect x="22" y="196" width="28" height="24"/><rect x="110" y="196" width="28" height="24"/>
+    <rect x="798" y="122" width="30" height="26"/><rect x="850" y="122" width="30" height="26"/>
+    <rect x="902" y="174" width="30" height="26"/>
+  </g>
+
+  <!-- calçada -->
+  <polygon points="0,300 960,300 960,540 0,540" fill="url(#calc6)"/>
+  <g stroke="#d3cdc0" stroke-width="2">
+    <line x1="0" y1="356" x2="960" y2="356"/>
+    <line x1="0" y1="424" x2="960" y2="424"/>
+    <line x1="0" y1="492" x2="960" y2="492"/>
+    <line x1="200" y1="300" x2="150" y2="540"/>
+    <line x1="450" y1="300" x2="430" y2="540"/>
+    <line x1="700" y1="300" x2="730" y2="540"/>
+  </g>
+
+  <!-- pista -->
+  <polygon points="0,300 960,300 960,262 0,262" fill="url(#pista6)"/>
+  <rect x="0" y="274" width="960" height="7" fill="#f0efe8" opacity="0.9"/>
+
+  <!-- árvores -->
+  <g>
+    <rect x="126" y="240" width="12" height="66" fill="#6b5a44"/>
+    <circle cx="132" cy="212" r="46" fill="url(#verde6)"/>
+    <circle cx="98" cy="234" r="30" fill="#35915c"/>
+    <circle cx="168" cy="236" r="28" fill="#35915c"/>
+    <rect x="836" y="246" width="11" height="60" fill="#6b5a44"/>
+    <circle cx="841" cy="222" r="38" fill="url(#verde6)"/>
+  </g>
+
+  <!-- faixa de pedestre limpa e sinalização -->
+  <g fill="#f4f1e6" opacity="0.95">
+    <polygon points="480,306 520,306 512,340 468,340"/>
+    <polygon points="548,306 588,306 582,340 538,340"/>
+    <polygon points="616,306 656,306 652,340 608,340"/>
+  </g>
+
+  <!-- lixeira -->
+  <g>
+    <rect x="404" y="368" width="66" height="82" rx="8" fill="#2f6b4f"/>
+    <rect x="396" y="356" width="82" height="16" rx="6" fill="#265a42"/>
+    <rect x="428" y="392" width="18" height="40" rx="4" fill="#3f7d5f"/>
+  </g>
+
+  <!-- pessoa caminhando (cadeirante/horizontal) -->
+  <g fill="#2f3d4d" opacity="0.9">
+    <circle cx="640" cy="392" r="12"/>
+    <path d="M636 406 q12 6 12 26 l-4 30 h-9 l-2 -26 l-10 -16 z"/>
+    <path d="M632 462 l-6 30 h8 l8 -26 z"/>
+    <path d="M644 462 l8 28 h-8 l-9 -24 z"/>
+  </g>
+
+  <!-- selo de concluído -->
+  <g transform="translate(816,398)">
+    <circle r="42" fill="#1e7d58" opacity="0.12"/>
+    <circle r="32" fill="#1e7d58"/>
+    <path d="M-13 1 l9 10 l19 -20" stroke="#ffffff" stroke-width="6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

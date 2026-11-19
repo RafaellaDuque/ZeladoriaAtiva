@@ -1,10 +1,17 @@
-# macOS
+# =============================================================================
+# Zeladoria Ativa — Global Solution 2026/2 (FIAP 2ESOR)
+# Repositório com 3 partes: banco-de-dados/ (SQL), java-console/ e web/ (React+Vite)
+# =============================================================================
+
+# ---------------------------------------------------------------- macOS
 .DS_Store
 .AppleDouble
 .LSOverride
 ._*
+.Spotlight-V100
+.Trashes
 
-# IDEs e Editores (IntelliJ, Eclipse, VS Code, NetBeans)
+# ------------------------------------------------- IDEs e editores
 .idea/
 *.iml
 .vscode/
@@ -12,23 +19,55 @@
 .project
 .settings/
 nbproject/
+*.sublime-project
+*.sublime-workspace
 
-# Compilados e builds do Java
+# ------------------------------------------------- Java (java-console/)
 *.class
 bin/
 out/
 target/
-build/
 *.jar
 *.war
 *.ear
 
-# Logs e arquivos temporarios
+# ------------------------------------------------- Node / Vite (web/)
+node_modules/
+.vite/
+.cache/
+.npm/
+coverage/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+*.local
+
+# ------------------------------------------------- Builds
+# Ignoramos builds por padrão, MAS a build do protótipo web é versionada de
+# propósito: é ela que abre por duplo clique no index.html e que o GitHub Pages
+# publica (Settings → Pages → pasta /web/dist).
+dist/
+dist-ssr/
+!web/dist/
+!web/dist/**
+
+# ------------------------------------------------- Ambiente e segredos
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# ------------------------------------------------- Logs e temporários
 *.log
 *.tmp
 *.bak
 *.swp
+*.orig
 *~
 
-# Arquivo de entrega com RMs e link do pitch (manter apenas local para o .zip)
+# ------------------------------------------------- Arquivos de entrega locais
+# RMs e link do pitch: preenchido só na entrega, não vai para o GitHub
 integrantes_e_pitch.txt

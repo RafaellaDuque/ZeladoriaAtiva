@@ -1,0 +1,9 @@
+# Regras específicas do protótipo web (as regras gerais estão no .gitignore da raiz).
+
+node_modules/
+.vite/
+.cache/
+*.local
+
+# A pasta dist/ NÃO é ignorada: a build é versionada para permitir
+# abrir o index.html por duplo clique e publicar no GitHub Pages.

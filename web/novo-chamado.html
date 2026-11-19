@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Abrir novo chamado — Zeladoria Ativa</title>
+    <meta
+      name="description"
+      content="Abra um chamado de zeladoria urbana em São Paulo: informe o bairro, a categoria, o endereço e anexe uma foto do problema."
+    />
+    <meta name="theme-color" content="#4a2f78" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Marca que o JS está ativo: as animações de scroll só escondem conteúdo
+       quando esta classe existe (sem JS tudo aparece normalmente). -->
+    <script>
+      document.documentElement.classList.add("js");
+    </script>
+
+    <script type="module" src="/src/main.jsx"></script>
+  </head>
+  <body data-pagina="novo">
+    <div id="root"></div>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; padding: 24px">
+        O Zeladoria Ativa precisa de JavaScript habilitado para renderizar o
+        formulário de abertura de chamado.
+      </p>
+    </noscript>
+  </body>
+</html>
