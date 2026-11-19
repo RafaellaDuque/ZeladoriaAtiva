@@ -5,7 +5,7 @@ import br.com.fiap.zeladoria.enums.StatusExecucao;
 public class OrdemServico {
 
     private int ordemId;
-    private String numeroOs;
+    private String numeros;
     private StatusExecucao statusExecucao;
     private String dataEmissao;
     private String dataConclusao;
@@ -16,7 +16,7 @@ public class OrdemServico {
 
     public OrdemServico(int ordemId, String numeroOs, StatusExecucao statusExecucao, String dataEmissao, String dataConclusao, String parecerTecnico, String urlFotoSolucao, ChamadoZeladoria chamado, OrgaoResponsavel orgao) {
         this.ordemId = ordemId;
-        this.numeroOs = numeroOs;
+        this.numeros = numeroOs;
         this.statusExecucao = statusExecucao;
         this.dataEmissao = dataEmissao;
         this.dataConclusao = dataConclusao;
@@ -34,12 +34,12 @@ public class OrdemServico {
         this.ordemId = ordemId;
     }
 
-    public String getNumeroOs() {
-        return numeroOs;
+    public String getNumeros() {
+        return numeros;
     }
 
-    public void setNumeroOs(String numeroOs) {
-        this.numeroOs = numeroOs;
+    public void setNumeros(String numeros) {
+        this.numeros = numeros;
     }
 
     public StatusExecucao getStatusExecucao() {
@@ -102,7 +102,7 @@ public class OrdemServico {
     public String toString() {
         return "OrdemServico{" +
                 "ordemId=" + ordemId +
-                ", numeroOs='" + numeroOs + '\'' +
+                ", numeros='" + numeros + '\'' +
                 ", statusExecucao=" + statusExecucao +
                 ", dataEmissao='" + dataEmissao + '\'' +
                 ", dataConclusao='" + dataConclusao + '\'' +

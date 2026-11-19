@@ -10,6 +10,10 @@ import java.util.List;
 
 public class ZeladoriaService {
 
+    private int proximoIdChamado;
+    private int proximoIdVoto;
+    private int proximoIdOrdem;
+
     private List<Municipio> municipios = new ArrayList<>();
     private List<Bairro> bairros = new ArrayList<>();
     private List<Cidadao> cidadaos = new ArrayList<>();
@@ -47,13 +51,10 @@ public class ZeladoriaService {
     }
 
     public ZeladoriaService(){
-        popularDadosInicias();
+        popularDadosIniciais();
+
     }
 
-    private void addBairro(int id, String nome, String regiao, int pop, int vuln, int municipioId) {
-        Municipio m = buscarMunicipioPorId(municipioId);
-        bairros.add(new Bairro(id, nome, regiao, pop, vuln, m));
-    }
 
     public Municipio buscarMunicipioPorId(int id) {
         for (Municipio m : municipios) {
@@ -100,6 +101,20 @@ public class ZeladoriaService {
         return null;
     }
 
+    public OrdemServico buscarOrdemPorId(int id) {
+        for (OrdemServico o : ordens) {
+            if (o.getOrdemId() == id) {
+                return o;
+            }
+        }
+        return null;
+    }
+
+    private void addBairro(int id, String nome, String regiao, int pop, int vuln, int municipioId) {
+        Municipio m = buscarMunicipioPorId(municipioId);
+        bairros.add(new Bairro(id, nome, regiao, pop, vuln, m));
+    }
+
     private void addChamado(int id, String protocolo, String titulo, String descricao,
                             Categoria categoria, String logradouro, String numero,
                             String pontoReferencia, String urlFoto, Status status,
@@ -135,7 +150,188 @@ public class ZeladoriaService {
     }
 
 
-    private void popularDadosInicias(){
+    public ChamadoZeladoria abrirChamado(String titulo, String descricao, Categoria categoria,
+                                         String logradouro, String numero, String pontoReferencia, String urlFoto,
+                                         int cidadaoAutorId, int bairroId) {
+
+        Cidadao autor = buscarCidadaoPorId(cidadaoAutorId);
+        Bairro bairro = buscarBairroPorId(bairroId);
+
+        if (autor == null) {
+            throw new IllegalArgumentException("Cidadao nao encontrado.");
+        }
+        if (bairro == null) {
+            throw new IllegalArgumentException("Bairro nao encontrado.");
+        }
+
+        int novoId = proximoIdChamado++;
+        String protocolo = String.format("ZEL-2026-%04d", novoId);
+        String dataHoje = java.time.LocalDate.now().toString();
+
+        ChamadoZeladoria chamado = new ChamadoZeladoria(novoId, protocolo, titulo, descricao,
+                categoria, logradouro, numero, pontoReferencia, urlFoto,
+                Status.ABERTO, dataHoje, autor, 0, bairro);
+
+        chamados.add(chamado);
+        return chamado;
+    }
+
+    public boolean removerChamado(int chamadoId) {
+        ChamadoZeladoria chamado = buscarChamadoPorId(chamadoId);
+        if (chamado == null) {
+            return false;
+        }
+
+        votos.removeIf(v -> v.getChamado().getChamadoId() == chamadoId);
+        ordens.removeIf(o -> o.getChamado().getChamadoId() == chamadoId);
+        chamados.remove(chamado);
+        return true;
+    }
+
+    public void atualizarStatusChamado(int chamadoId, Status novoStatus) {
+        ChamadoZeladoria chamado = buscarChamadoPorId(chamadoId);
+        if (chamado == null) {
+            throw new IllegalArgumentException("Chamado nao encontrado.");
+        }
+        chamado.setStatus(novoStatus);
+    }
+
+
+    public VotoChamado registrarVoto(int chamadoId, int cidadaoId, int nivelUrgencia, String comentario) {
+        ChamadoZeladoria chamado = buscarChamadoPorId(chamadoId);
+        if (chamado == null) {
+            throw new IllegalArgumentException("Chamado nao encontrado.");
+        }
+
+        Cidadao cidadao = buscarCidadaoPorId(cidadaoId);
+        if (cidadao == null) {
+            throw new IllegalArgumentException("Cidadao nao encontrado.");
+        }
+
+        if (nivelUrgencia < 1 || nivelUrgencia > 5) {
+            throw new IllegalArgumentException("O nivel de urgencia deve ser entre 1 e 5.");
+        }
+
+        for (VotoChamado v : votos) {
+            if (v.getChamado().getChamadoId() == chamadoId
+                    && v.getCidadao().getCidadaoId() == cidadaoId) {
+                throw new IllegalArgumentException("Este cidadao ja votou neste chamado.");
+            }
+        }
+
+        int idVoto = proximoIdVoto++;
+        String dataHoje = java.time.LocalDate.now().toString();
+        VotoChamado voto = new VotoChamado(idVoto, dataHoje, nivelUrgencia, comentario, chamado, cidadao);
+
+        votos.add(voto);
+        chamado.setTotalVotos(chamado.getTotalVotos() + 1);
+        return voto;
+    }
+
+    public double calcularMediaUrgencia(int chamadoId) {
+        int soma = 0;
+        int quantidade = 0;
+        for (VotoChamado v : votos) {
+            if (v.getChamado().getChamadoId() == chamadoId) {
+                soma += v.getNivelUrgencia();
+                quantidade++;
+            }
+        }
+        if (quantidade == 0) {
+            return 0.0;
+        }
+        return (double) soma / quantidade;
+    }
+
+
+    public List<ChamadoZeladoria> listarChamadosPorRanking() {
+        List<ChamadoZeladoria> ranking = new ArrayList<>(chamados);
+        ranking.sort((a, b) -> {
+            int porVotos = Integer.compare(b.getTotalVotos(), a.getTotalVotos());
+            if (porVotos != 0) {
+                return porVotos;
+            }
+            return Double.compare(calcularMediaUrgencia(b.getChamadoId()),
+                    calcularMediaUrgencia(a.getChamadoId()));
+        });
+        return ranking;
+    }
+
+    public ChamadoZeladoria buscarChamadoPorProtocolo(String protocolo) {
+        for (ChamadoZeladoria c : chamados) {
+            if (c.getProtocolo().equalsIgnoreCase(protocolo)) {
+                return c;
+            }
+        }
+        return null;
+    }
+
+    public List<ChamadoZeladoria> filtrarChamadosPorBairro(String nomeBairro) {
+        List<ChamadoZeladoria> resultado = new ArrayList<>();
+        for (ChamadoZeladoria c : chamados) {
+            if (c.getBairro().getNome().toLowerCase().contains(nomeBairro.toLowerCase())) {
+                resultado.add(c);
+            }
+        }
+        return resultado;
+    }
+
+    public List<ChamadoZeladoria> filtrarChamadosPorCategoria(Categoria categoria) {
+        List<ChamadoZeladoria> resultado = new ArrayList<>();
+        for (ChamadoZeladoria c : chamados) {
+            if (c.getCategoria() == categoria) {
+                resultado.add(c);
+            }
+        }
+        return resultado;
+    }
+
+    public List<ChamadoZeladoria> filtrarChamadosPorStatus(Status status) {
+        List<ChamadoZeladoria> resultado = new ArrayList<>();
+        for (ChamadoZeladoria c : chamados) {
+            if (c.getStatus() == status) {
+                resultado.add(c);
+            }
+        }
+        return resultado;
+    }
+
+    public OrdemServico emitirOrdemServico(int chamadoId, int orgaoId, String parecer) {
+        ChamadoZeladoria chamado = buscarChamadoPorId(chamadoId);
+        if (chamado == null) {
+            throw new IllegalArgumentException("Chamado nao encontrado.");
+        }
+        OrgaoResponsavel orgao = buscarOrgaoPorId(orgaoId);
+        if (orgao == null) {
+            throw new IllegalArgumentException("Orgao nao encontrado.");
+        }
+
+        int idOrdem = proximoIdOrdem++;
+        String numeroOs = String.format("OS-2026-%04d", idOrdem);
+        String dataHoje = java.time.LocalDate.now().toString();
+
+        OrdemServico ordem = new OrdemServico(idOrdem, numeroOs, StatusExecucao.EQUIPE_EM_CAMPO,
+                dataHoje, null, parecer, null, chamado, orgao);
+
+        ordens.add(ordem);
+        chamado.setStatus(Status.EM_ANDAMENTO);
+        return ordem;
+    }
+
+    public void concluirOrdemServico(int ordemId, String parecerTecnico, String urlFotoSolucao) {
+        OrdemServico ordem = buscarOrdemPorId(ordemId);
+        if (ordem == null) {
+            throw new IllegalArgumentException("Ordem de servico nao encontrada.");
+        }
+        ordem.setStatusExecucao(StatusExecucao.CONCLUIDA);
+        ordem.setDataConclusao(java.time.LocalDate.now().toString());
+        ordem.setParecerTecnico(parecerTecnico);
+        ordem.setUrlFotoSolucao(urlFotoSolucao);
+        ordem.getChamado().setStatus(Status.RESOLVIDO);
+    }
+
+
+    private void popularDadosIniciais(){
 
         municipios.add(new Municipio(1, "Sao Paulo", "SP", "3550308"));
 
@@ -248,6 +444,11 @@ public class ZeladoriaService {
         addOrdem(2, "OS-2026-0002", StatusExecucao.CONCLUIDA, "2026-10-28", "2026-10-30",
                 "Retiradas 4 toneladas de entulho e realizada lavagem e desobstrucao da calcada.",
                 "https://storage.zeladoria.gov.br/solucoes/os-2026-0002-depois.jpg", 4, 3);
+
+        proximoIdChamado = chamados.size() + 1;
+        proximoIdVoto = votos.size() + 1;
+        proximoIdOrdem = ordens.size() + 1;
+
 
     }
 }
