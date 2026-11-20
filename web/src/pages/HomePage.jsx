@@ -288,76 +288,72 @@ export default function HomePage() {
       {/* ========================== IMPACTO E ODS ========================== */}
       <section className="secao secao--escura" aria-labelledby="tituloOds">
         <div className="container">
-          <Revelar className="secao__topo">
-            <div>
-              <p className="sobretitulo">Agenda 2030 da ONU</p>
-              <h2 id="tituloOds">Impacto social e ODS</h2>
-              <p>
-                Luz na rua, calçada livre e bueiro funcionando não são luxo: são
-                acesso à cidade. É por aí que o projeto se conecta à Agenda
-                2030.
-              </p>
-            </div>
+          <Revelar className="ods-topo">
+            <p className="sobretitulo">Agenda 2030 da ONU</p>
+            <h2 id="tituloOds">Impacto social e ODS</h2>
+            <p>
+              Luz na rua, calçada livre e bueiro funcionando não são luxo: são
+              acesso à cidade. É por aí que o projeto se conecta à Agenda 2030.
+            </p>
           </Revelar>
 
-          <div className="ods-grade">
-            <Revelar as="article" className="ods-card ods-card--11">
-              <p className="ods-card__numero">
-                ODS <b>11</b> · Cidades e Comunidades Sustentáveis
+          <div className="ods-lista">
+            <Revelar as="article" className="ods-faixa">
+              <p className="ods-faixa__indice">
+                ODS
+                <b>11</b>
+                <span>Cidades e Comunidades Sustentáveis</span>
               </p>
-              <h3>Zeladoria como política de acesso à cidade</h3>
-              <p>
-                Calçada livre, iluminação pública funcionando e drenagem que não
-                alaga são a base do direito à cidade. Ao dar voz a quem vive o
-                território, a plataforma ataca desigualdades dentro do mesmo
-                município.
-              </p>
-              <ul>
-                <li>
-                  <Icon nome="check" />
-                  <span>
-                    <b>Meta 11.1</b> Garantir acesso a moradia e serviços
-                    básicos adequados — inclusive infraestrutura urbana segura.
-                  </span>
-                </li>
-                <li>
-                  <Icon nome="check" />
-                  <span>
-                    <b>Meta 11.3</b> Gestão participativa e integrada do
-                    planejamento urbano, com a comunidade como curadora das
-                    prioridades.
-                  </span>
-                </li>
-              </ul>
+              <div className="ods-faixa__corpo">
+                <h3>Zeladoria como política de acesso à cidade</h3>
+                <p>
+                  Calçada livre, iluminação pública funcionando e drenagem que
+                  não alaga são a base do direito à cidade. Ao dar voz a quem
+                  vive o território, a plataforma ataca desigualdades dentro do
+                  mesmo município.
+                </p>
+                <ul>
+                  <li>
+                    <b>Meta 11.1</b>
+                    Garantir acesso a moradia e serviços básicos adequados —
+                    inclusive infraestrutura urbana segura.
+                  </li>
+                  <li>
+                    <b>Meta 11.3</b>
+                    Gestão participativa e integrada do planejamento urbano,
+                    com a comunidade como curadora das prioridades.
+                  </li>
+                </ul>
+              </div>
             </Revelar>
 
-            <Revelar as="article" className="ods-card ods-card--9" atraso={90}>
-              <p className="ods-card__numero">
-                ODS <b>9</b> · Indústria, Inovação e Infraestrutura
+            <Revelar as="article" className="ods-faixa ods-faixa--invertida" atraso={90}>
+              <p className="ods-faixa__indice">
+                ODS
+                <b>9</b>
+                <span>Indústria, Inovação e Infraestrutura</span>
               </p>
-              <h3>Tecnologia cívica sobre dados abertos</h3>
-              <p>
-                O mesmo domínio de dados usado no banco Oracle, no console Java
-                e na web permite medir a qualidade da infraestrutura urbana
-                bairro a bairro e priorizar o investimento público com
-                evidência, não com palpite.
-              </p>
-              <ul>
-                <li>
-                  <Icon nome="check" />
-                  <span>
-                    <b>Meta 9.1</b> Infraestrutura confiável, sustentável e
-                    resiliente, com acesso equitativo para todos.
-                  </span>
-                </li>
-                <li>
-                  <Icon nome="check" />
-                  <span>
-                    <b>Meta 9.5</b> Fortalecimento da capacidade tecnológica e
-                    inovação em serviços públicos locais.
-                  </span>
-                </li>
-              </ul>
+              <div className="ods-faixa__corpo">
+                <h3>Tecnologia cívica sobre dados abertos</h3>
+                <p>
+                  O mesmo domínio de dados usado no banco Oracle, no console
+                  Java e na web permite medir a qualidade da infraestrutura
+                  urbana bairro a bairro e priorizar o investimento público com
+                  evidência, não com palpite.
+                </p>
+                <ul>
+                  <li>
+                    <b>Meta 9.1</b>
+                    Infraestrutura confiável, sustentável e resiliente, com
+                    acesso equitativo para todos.
+                  </li>
+                  <li>
+                    <b>Meta 9.5</b>
+                    Fortalecimento da capacidade tecnológica e inovação em
+                    serviços públicos locais.
+                  </li>
+                </ul>
+              </div>
             </Revelar>
           </div>
         </div>

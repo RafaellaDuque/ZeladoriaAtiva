@@ -1579,82 +1579,107 @@ ol {
 }
 
 /* ------------------------------------------------------------ 10. ODS */
-.ods-grade {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+/* Faixas horizontais: o número ocupa um lado e o texto o outro.
+   A segunda faixa espelha a primeira, para não repetir os cartões de cima. */
+.ods-topo {
+  max-width: 640px;
+  margin-bottom: calc(28px * var(--escala-espaco));
+}
+.ods-topo > p:last-child {
+  margin-bottom: 0;
+  color: #ebe0d3;
 }
 
-.ods-card {
-  position: relative;
-  border-radius: var(--r-lg);
-  padding: 26px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  overflow: hidden;
+.ods-lista {
+  display: flex;
+  flex-direction: column;
 }
-.ods-card__numero {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 8px;
+.ods-faixa {
+  display: grid;
+  grid-template-columns: minmax(160px, 230px) minmax(0, 1fr);
+  gap: calc(18px * var(--escala-espaco)) calc(48px * var(--escala-espaco));
+  align-items: start;
+  padding: calc(32px * var(--escala-espaco)) 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+.ods-faixa:last-child {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+}
+.ods-faixa--invertida {
+  grid-template-columns: minmax(0, 1fr) minmax(160px, 230px);
+}
+.ods-faixa--invertida .ods-faixa__indice {
+  order: 2;
+  text-align: right;
+}
+.ods-faixa--invertida .ods-faixa__indice span {
+  margin-left: auto;
+}
+.ods-faixa__indice {
+  margin: 0;
   font-family: var(--fonte-titulo);
-  font-size: 0.74rem;
+  font-size: 0.78rem;
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.16em;
   text-transform: uppercase;
   color: #c7b5a1;
-  margin-bottom: 12px;
 }
-.ods-card__numero b {
-  font-size: 2.6rem;
-  letter-spacing: -0.04em;
-  line-height: 0.9;
+.ods-faixa__indice b {
+  display: block;
+  margin: 8px 0 12px;
+  font-size: clamp(4.6rem, 8vw, 6.4rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.06em;
+  color: #fd9d24;
+}
+.ods-faixa--invertida .ods-faixa__indice b {
+  color: #fd6925;
+}
+.ods-faixa__indice span {
+  display: block;
+  max-width: 16ch;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+  line-height: 1.3;
+  text-transform: none;
+  color: #f7efe5;
+}
+.ods-faixa h3 {
+  margin: 4px 0 10px;
   color: #fff;
+  font-size: clamp(1.25rem, 2vw, 1.55rem);
 }
-.ods-card h3 {
-  color: #fff;
-  font-size: 1.16rem;
-  margin-bottom: 8px;
-}
-.ods-card p {
+.ods-faixa__corpo > p {
+  max-width: 62ch;
+  margin: 0 0 22px;
   color: #dacaba;
-  font-size: 0.9rem;
-  margin-bottom: 16px;
+  font-size: 0.98rem;
 }
-
-.ods-card ul {
-  list-style: none;
+.ods-faixa ul {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px 28px;
   margin: 0;
   padding: 0;
-  display: grid;
-  gap: 10px;
+  list-style: none;
 }
-.ods-card li {
-  display: grid;
-  grid-template-columns: 20px minmax(0, 1fr);
-  gap: 10px;
-  font-size: 0.84rem;
+.ods-faixa li {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
   color: #efe4d6;
+  font-size: 0.9rem;
   line-height: 1.45;
 }
-.ods-card li b {
-  color: #fff;
+.ods-faixa li b {
   display: block;
+  margin-bottom: 4px;
+  color: #fff;
+  font-family: var(--fonte-titulo);
   font-size: 0.78rem;
-  letter-spacing: 0.02em;
-}
-.ods-card li svg {
-  width: 18px;
-  height: 18px;
-  margin-top: 2px;
-  color: #f2a56b;
-}
-
-.ods-card--11 {
-  box-shadow: inset 0 0 0 1px rgba(242, 165, 107, 0.28);
-}
-.ods-card--9 {
-  box-shadow: inset 0 0 0 1px rgba(198, 64, 42, 0.18);
+  letter-spacing: 0.04em;
 }
 
 /* ------------------------------------------- 11. BARRA DE FILTROS */
@@ -3204,9 +3229,6 @@ html.js .revelar--visivel {
   .filtros-busca {
     grid-column: 1 / -1;
   }
-  .ods-grade {
-    grid-template-columns: 1fr;
-  }
 }
 
 @media (max-width: 860px) {
@@ -3226,6 +3248,20 @@ html.js .revelar--visivel {
   }
   .dossies {
     grid-template-columns: 1fr;
+  }
+  .ods-faixa,
+  .ods-faixa--invertida {
+    grid-template-columns: 1fr;
+  }
+  .ods-faixa--invertida .ods-faixa__indice {
+    order: 0;
+    text-align: left;
+  }
+  .ods-faixa--invertida .ods-faixa__indice span {
+    margin-left: 0;
+  }
+  .ods-faixa__indice b {
+    font-size: 4.2rem;
   }
   .rodape__grade {
     grid-template-columns: 1fr 1fr;
@@ -3384,6 +3420,9 @@ html.js .revelar--visivel {
   .protocolo-destaque {
     font-size: 1.06rem;
     padding: 10px 14px;
+  }
+  .ods-faixa ul {
+    grid-template-columns: 1fr;
   }
   .dossie__prazo {
     margin-left: 0;
